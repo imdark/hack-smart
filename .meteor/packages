@@ -16,7 +16,6 @@ meteorhacks:fast-render
 mrt:moment
 fake:angular
 accounts-facebook
-accounts-twitter
 accounts-google
 accounts-meetup
 accounts-github
