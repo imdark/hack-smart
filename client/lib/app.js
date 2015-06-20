@@ -1,0 +1,1 @@
+angular.module('HackSmart', ['angular-meteor']);

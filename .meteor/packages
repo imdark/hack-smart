@@ -1,0 +1,31 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+insecure
+sanjo:jasmine
+velocity:html-reporter
+less
+nemo64:bootstrap
+matteodem:easy-search
+autopublish
+meteorhacks:fast-render
+mrt:moment
+fake:angular
+accounts-facebook
+accounts-twitter
+accounts-google
+accounts-meetup
+accounts-github
+accounts-ui
+accounts-password
+pauli:accounts-linkedin
+doctorpangloss:admin
+houston:admin
+mrt:accounts-admin-ui-bootstrap-3
+yogiben:admin
+alanning:roles
+splendido:accounts-meld

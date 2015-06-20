@@ -1,0 +1,87 @@
+<br/>
+<br/>
+<br/>
+<span ng-include="'client/navbar.ng.html'"></span>
+<div ng-controller="hackersController as hackers">
+	<h2>Updates <a ng-click="hackers.startEditingNewUpdate()" href="">+</a></h2>
+	<ol>
+		<li ng-if="!!hackers.newUpdate" style="list-style-type:none">
+			<h3><input ng-model="hackers.newUpdate.title"/></h3>
+			<div><textarea multiline="true" cols="130" ng-model="hackers.newUpdate.content"></textarea></div>
+			<button ng-click="hackers.addNewUpdate()" class="btn btn-ok">submit</button>
+		</li>
+		<li ng-repeat="update in hackers.updates | orderBy: 'time':true" style="list-style-type:none">
+			<h3>{{update.title}}</h3>
+			<div>{{update.content}}</div>
+			<i class="small">{{hackers.timeFromNow(update.time)}}</i>
+			<div comments-panel comments="update.comments"></div>
+		</li>
+	</ol>
+	<h2>Hackers <a ng-click="hackers.newHacker = {name: '', skils: [], phoneNumber: '', teamNumber: ''}" href="">+</a></h2>
+	<table class="table">
+		<tr>
+			<th>img</th>
+			<th>name</th>
+			<th>skils</th>
+			<th>phone number</th>
+			<th>team number</th>
+			<th>delete</th>
+		</tr>
+		<tr ng-if="!!hackers.newHacker">
+			<td ng-switch="!hackers.newHacker.image">
+				<a ng-switch-when="false"><img ng-src="hacker.image"><img></a>
+				<a ng-switch-when="true" class="glyphicon glyphicon-cloud-upload"></a>
+			</td>
+			<td><input ng-model="hackers.newHacker.name" ng-keypress="hackers.addNewHacker($event)" placeholder="name" required/></td>
+			<td><input ng-model="hackers.newHacker.skils" ng-keypress="hackers.addNewHacker($event)" placeholder="skils"/></td>
+			<td><input ng-model="hackers.newHacker.phoneNumber" ng-keypress="hackers.addNewHacker($event)" placeholder="phoneNumber"/></td>
+			<td><input ng-model="hackers.newHacker.teamNumber" ng-keypress="hackers.addNewHacker($event)" placeholder="teamNumber"/></td>
+			<td><a ng-click="hackers.addNewHacker()" href="" >+</a></td>
+		</tr>
+		
+		<tr ng-repeat="hacker in hackers.hackerList">
+			<td ng-switch="!hacker.image">
+				<a ng-switch-when="false"><img ng-src="hacker.image"><img></a>
+				<a ng-switch-when="true" class="glyphicon glyphicon-cloud-upload"></a>
+			</td>
+			<td>{{hacker.name}}</td>
+			<td>{{hacker.skils.join(',')}}</td>
+			<td>{{hacker.phoneNumber}}</td>
+			<td>{{hacker.teamNumber}}</td>
+			<td><a ng-click="hackers.hackerList.remove(hacker)" href="">x</a></td>
+		</tr>
+	</table>
+	<h2>Teams <a ng-click="hackers.newTeam = {number: hacker.teamsList.length, name: '', members: [], lookingFor: []}" href="">+</a></h2>
+	<table class="table">
+		<tr>
+			<th>logo</th>
+			<th>name</th>
+			<th>number</th>
+			<th>members</th>
+			<th>looking for</th>
+			<th>delete</th>
+		</tr>
+		<tr ng-if="!!hackers.newTeam">
+			<td ng-switch="!hackers.newTeam.logo">
+				<a ng-switch-when="false"><img ng-src="hacker.logo"><img></a>
+				<a ng-switch-when="true" class="glyphicon glyphicon-cloud-upload"></a>
+			</td>
+			<td><input ng-model="hackers.newTeam.name" ng-keypress="hackers.addNewTeam($event)" placeholder="name" required/></td>
+			<td>{{hackers.newTeam.number}}</td>
+			<td><input ng-model="hackers.newTeam.members" ng-keypress="hackers.addNewTeam($event)" placeholder="members"/></td>
+			<td><input ng-model="hackers.newTeam.lookingFor" ng-keypress="hackers.addNewTeam($event)" placeholder="looking for"/></td>
+			<td><a ng-click="hackers.addNewTeam()" href="" >+</a></td>
+		</tr>
+		<tr ng-repeat="team in hackers.teamsList" ng-class="{red: !!team.lookingFor}">
+			<td ng-switch="!team.logo">
+				<a ng-switch-when="false"><img ng-src="team.logo"><img></a>
+				<a ng-switch-when="true" class="glyphicon glyphicon-cloud-upload"></a>
+			</td>
+			<td>{{team.name}}</td>
+			<td>{{team.number}}</td>
+			<td>{{team.members.join(', ')}}</td>
+			<td>{{team.lookingFor.join(', ')}}</td>
+			<td><a ng-click="hackers.teamsList.remove(team)" href="">x</a></td>
+		</tr>
+	</table>
+</div>

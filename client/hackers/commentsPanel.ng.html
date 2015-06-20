@@ -1,0 +1,20 @@
+<div>
+	<div ng-if="!hackers.newComment" >
+		<a href="" ng-click="hackers.newComment = {poster: currentUser || '', postTime: Date(), text: ''}" >add comment</a> | 
+		<a href="" ng-click="hackers.showComments = !hackers.showComments">{{hackers.showComments ? 'hide' : 'show'}} comments({{(comments && comments.length) || '0'}})</a>
+	</div>
+	<div ng-if="!!hackers.newComment">
+		<h3 ng-if="hackers.newComment.poster">{{hackers.newComment.poster}}</h3>
+		<textarea multiline cols="130" class="form-control" ng-model="hackers.newComment.text"></textarea>
+		<div class="btn btn-submit" ng-click="comments.push(hackers.newComment); hackers.newComment = null">post</div>
+	</div>
+	<div ng-if="hackers.showComments == true">
+		<hr/>
+		<div ng-repeat="comment in comments">
+			<a href="" ng-click="comments.remove(comment)">x </a>
+			<h3 ng-if="newComment.poster">{{comment.poster}}</h3>
+			<div>{{comment.text}}</div>
+			{{hackers.timeFromNow(newComment.postTime)}}
+		</div>
+	</div>
+</div>
